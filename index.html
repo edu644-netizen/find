@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>비키니시티 분실물 탐정단 - 스마트 자동 찾기 서비스</title>
+
+  <!-- 구글 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="finder.css">
+</head>
+<body>
+
+  <!-- 🧽 헤더 -->
+  <header class="sponge-header">
+    <div class="header-inner">
+      <div class="logo-group">
+        <!-- 원작 애니메이션 스폰지밥 마스코트 -->
+        <div class="character-avatar">
+          <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/SpongeBob_SquarePants_character.svg" alt="원작 스폰지밥" onerror="this.src='https://cdn.pixabay.com/photo/2021/08/18/16/09/sponge-6555986_1280.png'">
+        </div>
+        <div class="logo-text">
+          <h1>비키니시티 분실물 탐정단 <span>SPONGE-FINDER</span></h1>
+          <p>중고 거래 사이트를 실시간으로 탐색하여 잃어버린 물건을 찾아드립니다</p>
+        </div>
+      </div>
+
+      <!-- 탐색 컨트롤 스위치 -->
+      <div class="sponge-controls">
+        <button id="macro-toggle-btn" class="sponge-switch off" onclick="toggleMacro()">
+          <i class="fa-solid fa-magnifying-glass"></i> 실시간 탐색 스캐너: <span id="macro-status-text">OFF (정지)</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 알림 토스트 -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- 🌊 메인 콘텐츠 -->
+  <main class="sponge-main">
+
+    <!-- 배너: 진짜 원작 애니메이션 스폰지밥 & 뚱이 걷기 스틸컷 -->
+    <div class="sponge-banner">
+      <div class="banner-text">
+        <h2>🧽 "잃어버린 물건, 우리가 실시간으로 찾아볼게!"</h2>
+        <p>분실물을 등록한 후 탐색 스캐너를 켜두시면, 중고 거래 웹사이트를 자동으로 크롤링하여 탐지합니다.</p>
+      </div>
+      <div class="banner-img-wrap">
+        <img src="https://static.wikia.nocookie.net/spongebob/images/d/d7/SpongeBob_SquarePants_and_Patrick_Star.png" alt="스폰지밥과 뚱이 원작 스틸컷" class="banner-char-img" onerror="this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500'">
+      </div>
+    </div>
+
+    <!-- 메인 레이아웃 -->
+    <div class="sponge-grid">
+
+      <!-- 좌측: 탐색 콘솔 및 분실물 목록 -->
+      <div class="left-section">
+
+        <!-- 탐색 콘솔 -->
+        <div class="sponge-card">
+          <div class="card-head bg-blue">
+            <h3><i class="fa-solid fa-water"></i> 실시간 중고사이트 탐색 콘솔</h3>
+            <span id="scan-counter" class="sponge-badge">탐색 횟수: 0회</span>
+          </div>
+          <div id="terminal-logs" class="sponge-console">
+            <div class="log-line sys">🧽 [분실물 탐정단] 서비스 준비 완료. '실시간 탐색 스캐너 [ON]' 버튼을 누르면 모니터링을 시작합니다.</div>
+          </div>
+        </div>
+
+        <!-- 분실물 목록 -->
+        <div class="sponge-card">
+          <div class="card-head bg-yellow">
+            <h3><i class="fa-solid fa-box-open"></i> 🎒 추적 중인 내 분실물</h3>
+            <button class="btn btn-sm btn-yellow" onclick="openModal('modal-add-lost')">
+              <i class="fa-solid fa-plus"></i> 새 분실물 등록
+            </button>
+          </div>
+          <div id="lost-items-list" class="lost-items-container">
+            <!-- 동적 생성 -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 우측: 매칭 감지 결과 -->
+      <div class="right-section">
+        <div class="sponge-card highlight-card">
+          <div class="card-head bg-pink">
+            <h3><i class="fa-solid fa-star"></i> 🌸 일치하는 중고 물품 감지 결과</h3>
+          </div>
+          <p class="card-sub">중고 사이트에서 감지된 내 분실물과의 실시간 매칭 내역입니다.</p>
+
+          <div id="matched-results" class="match-results-container">
+            <!-- 진짜 원작 스폰지밥 & 뚱이 볼 빵빵하게 앉아있는 원작 짤 -->
+            <div class="empty-waiting-box">
+              <img src="https://static.wikia.nocookie.net/spongebob/images/5/53/Patrick_and_SpongeBob_cheeks.png" alt="볼 빵빵 원작 스폰지밥과 뚱이" class="waiting-img" onerror="this.src='https://images.unsplash.com/photo-1563089145-599997674d42?w=500'">
+              <p>스폰지밥과 뚱이가 중고 거래 사이트를 모니터링 중입니다...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- 분실물 등록 모달 -->
+  <div id="modal-add-lost" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>🧽 잃어버린 물건 등록</h3>
+        <button class="close-btn" onclick="closeModal('modal-add-lost')">&times;</button>
+      </div>
+      <form id="form-lost" onsubmit="submitLostItem(event)">
+        <div class="form-group">
+          <label>잃어버린 물건 이름 <span class="required">*</span></label>
+          <input type="text" id="lost-title" placeholder="예: 뚱이 핑크 키링 인형" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>카테고리</label>
+            <select id="lost-category">
+              <option value="패션/잡화">패션/잡화</option>
+              <option value="전자제품">전자제품</option>
+              <option value="스포츠/레저">스포츠/레저</option>
+              <option value="기타">기타</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>분실 장소</label>
+            <input type="text" id="lost-location" placeholder="서울 마포구 상암동">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>자동 감지 키워드 (쉼표 구분) <span class="required">*</span></label>
+          <input type="text" id="lost-keywords" placeholder="뚱이, 인형, 핑크, 키링" required>
+        </div>
+        <div class="form-group">
+          <label>주인 이름</label>
+          <input type="text" id="lost-owner" placeholder="스폰지밥">
+        </div>
+        <div class="form-group">
+          <label>특이사항/상세설명 (스티커, 기스 등)</label>
+          <textarea id="lost-desc" rows="3" placeholder="바지에 연보라색 꽃무늬가 있는 뚱이 인형"></textarea>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-gray" onclick="closeModal('modal-add-lost')">취소</button>
+          <button type="submit" class="btn btn-yellow">추적 등록하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="finder.js"></script>
+</body>
+</html>

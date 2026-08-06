@@ -1,0 +1,13 @@
+# Dependencies (용량이 크므로 깃허브에 올리지 않음)
+node_modules/
+
+# OS / System temp files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env

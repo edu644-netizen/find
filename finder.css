@@ -1,0 +1,432 @@
+/* 🧽 스폰지밥 비키니시티 파스텔 테마 스타일시트 (public_finder/finder.css) */
+
+:root {
+  --sea-blue-bg: #e0f2fe;
+  --sea-blue-deep: #0284c7;
+  --card-bg: #ffffff;
+  
+  --sponge-yellow: #fde047;
+  --sponge-yellow-dark: #eab308;
+  --patrick-pink: #f472b6;
+  --patrick-pink-light: #fce7f3;
+  --bubble-cyan: #38bdf8;
+  
+  --text-dark: #1e293b;
+  --text-sub: #64748b;
+  --border-color: #cbd5e1;
+  
+  --shadow-md: 0 8px 20px rgba(2, 132, 199, 0.12);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Jua', 'Noto Sans KR', sans-serif;
+  background-color: var(--sea-blue-bg);
+  background-image: radial-gradient(#bae6fd 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  color: var(--text-dark);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* 🧽 헤더 */
+.sponge-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid var(--sponge-yellow);
+  padding: 12px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.header-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* 마스코트 이미지 4: 점프하는 스폰지밥 */
+.character-avatar {
+  width: 58px;
+  height: 58px;
+  background: var(--sponge-yellow);
+  border: 3px solid #000;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.character-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-text h1 {
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 1.5rem;
+  color: var(--sea-blue-deep);
+  letter-spacing: -0.5px;
+}
+
+.logo-text h1 span {
+  font-size: 0.75rem;
+  background: var(--patrick-pink);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-left: 6px;
+}
+
+.logo-text p {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+}
+
+.sponge-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.sponge-switch {
+  border: 2px solid var(--text-dark);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-family: 'Jua', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sponge-switch.off {
+  background: #f1f5f9;
+  color: var(--text-sub);
+}
+
+.sponge-switch.on {
+  background: var(--sponge-yellow);
+  color: var(--text-dark);
+  box-shadow: 0 0 15px rgba(253, 224, 71, 0.8);
+  animation: bounce-btn 1s infinite alternate;
+}
+
+@keyframes bounce-btn {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+
+/* 🌊 메인 콘텐츠 */
+.sponge-main {
+  max-width: 1300px;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+/* 배너 이미지 1: 스폰지밥 & 뚱이 걷는 짤 */
+.sponge-banner {
+  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 20px 32px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  border: 3px solid #fff;
+  overflow: hidden;
+}
+
+.banner-text h2 {
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+
+.banner-text p {
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.banner-img-wrap {
+  width: 180px;
+  height: 110px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+.banner-char-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 2분할 레이아웃 */
+.sponge-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .sponge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sponge-card {
+  background: var(--card-bg);
+  border: 3px solid #000;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.highlight-card {
+  border-color: var(--patrick-pink);
+  background: #fff5f8;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  color: #fff;
+  margin-bottom: 14px;
+  border: 2px solid #000;
+}
+
+.bg-blue { background: var(--bubble-cyan); }
+.bg-yellow { background: var(--sponge-yellow-dark); }
+.bg-pink { background: var(--patrick-pink); }
+
+.card-head h3 {
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 1.2rem;
+}
+
+.card-sub {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  margin-bottom: 16px;
+}
+
+.sponge-badge {
+  background: #fff;
+  color: var(--text-dark);
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  border: 1px solid #000;
+}
+
+.sponge-console {
+  background: #f8fafc;
+  border: 2px dashed var(--sea-blue-deep);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  height: 200px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-line {
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1.4;
+}
+
+.log-line.sys { background: #e2e8f0; color: #475569; }
+.log-line.scan { background: #e0f2fe; color: var(--sea-blue-deep); }
+.log-line.found { background: #dcfce7; color: #15803d; font-weight: bold; border: 1px solid #86efac; }
+
+/* 이미지 3: 볼 빵빵하게 대기하는 이미지 래퍼 */
+.empty-waiting-box {
+  text-align: center;
+  padding: 20px;
+  background: #ffffff;
+  border: 2px dashed var(--patrick-pink);
+  border-radius: var(--radius-md);
+}
+
+.waiting-img {
+  width: 100%;
+  max-width: 240px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 2px solid var(--border-color);
+}
+
+.empty-waiting-box p {
+  font-size: 0.88rem;
+  color: var(--text-sub);
+}
+
+/* 분실물 카드 및 결과 카드 */
+.lost-items-container, .match-results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lost-item-box {
+  background: #f8fafc;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.lost-item-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.tag-item {
+  background: #e0f2fe;
+  color: var(--sea-blue-deep);
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.match-box {
+  background: #fff;
+  border: 3px solid var(--patrick-pink);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(244, 114, 182, 0.2);
+}
+
+.match-score-badge {
+  background: var(--sponge-yellow);
+  border: 2px solid #000;
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* 알림 토스트 (이미지 2: 무지개 스폰지밥 적용) */
+.toast-container {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: #fff;
+  border: 3px solid var(--sponge-yellow-dark);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  animation: slideIn 0.3s ease-out;
+  max-width: 380px;
+}
+
+.toast-rainbow-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 2px solid var(--sponge-yellow);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* 모달 */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(2, 132, 199, 0.4);
+  backdrop-filter: blur(4px);
+  display: none; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+
+.modal-backdrop.active { display: flex; }
+
+.modal-box {
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: var(--radius-lg);
+  width: 100%; max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.close-btn { background: none; border: none; font-size: 1.6rem; cursor: pointer; }
+
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.85rem; margin-bottom: 4px; font-weight: 700; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 10px; border: 2px solid var(--border-color); border-radius: 8px; font-family: inherit; font-size: 0.9rem;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.modal-foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+.btn { border: 2px solid #000; padding: 8px 18px; border-radius: 10px; font-family: 'Jua', sans-serif; font-size: 0.9rem; cursor: pointer; }
+.btn-yellow { background: var(--sponge-yellow); color: #000; }
+.btn-yellow:hover { background: var(--sponge-yellow-dark); }
+.btn-gray { background: #e2e8f0; color: var(--text-dark); }
+.btn-sm { padding: 4px 10px; font-size: 0.8rem; }
+.required { color: var(--patrick-pink); }
